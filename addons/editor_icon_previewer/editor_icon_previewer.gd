@@ -42,7 +42,7 @@ func _on_update_requested():
 func _populate_icons():
 	icon_window.clear()
 
-	var godot_theme = get_editor_interface().get_base_control().theme
+	var godot_theme := get_editor_interface().get_base_control().theme
 
 	var list = Array(godot_theme.get_icon_list('EditorIcons'))
 	list.sort() # alphabetically
@@ -50,7 +50,8 @@ func _populate_icons():
 	var no_name = []
 
 	for icon_name in list:
-		var icon_tex = godot_theme.get_icon(icon_name, 'EditorIcons')
+		var icon_tex := godot_theme.get_icon(icon_name, 'EditorIcons').duplicate()
+		icon_tex.flags &= ~Texture.FLAG_FILTER
 
 		if icon_name.empty():
 			no_name.append(icon_tex)
